@@ -1,0 +1,15 @@
+module divide (
+    input a[16],
+    input b[16],
+    output out[16]   // 16-bit output
+  ) {
+  
+  // Error when divided by 0, which is reflected by lighting up all of the output LEDs
+  always {
+    if(b==0){
+      out = 161111111111111111;
+    } else {
+      out = a / b; // computes the floor division
+    }
+  }
+}

@@ -1,0 +1,48 @@
+module boolean (
+    input a[16],  // input a
+    input b[16],  // input b
+    input alufn[7],//ALUFN[6:0]
+    output out[16]
+  ) {
+  
+
+  always {
+  
+    //AND
+    if(alufn[3:0] == 4b1000){
+      out = a & b;
+    }
+    //OR 
+    else if (alufn[3:0] == 4b1110){
+        out = a | b;
+    }
+    //XOR 
+    else if(alufn[3:0] == 4b0110){
+        out = a ^ b;
+    }
+    // A 
+    else if (alufn[3:0] == 4b1010){
+        out = a;
+    }
+    // NAND 
+    else if(alufn[3:0] == 4b0111){
+        out = ~(a & b);
+    }
+    //NOR
+     else if(alufn[3:0] == 4b0001){
+        out = ~(a | b);
+    }
+    //XNOR
+    else if(alufn[3:0] == 4b1001){
+        out = a ~^ b;
+    }
+    //B 
+    else if(alufn[3:0] == 4b0101){
+        out = b;
+    }
+    //normalmode
+    else{
+        out = 0;
+  }
+}
+}

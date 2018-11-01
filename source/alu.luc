@@ -1,0 +1,72 @@
+module alu (
+    input alufn[7],  // ALU Function Input
+    input a[16],
+    input b[16],
+    input e,         // error toggle
+    output out[16],  // 16-bit output
+    output z,
+    output v,
+    output n
+  ) {
+  
+  // Initialize ALU modules
+  adder adder16;
+  compare compare16;
+  boolean boolean16;
+  shifter shifter16;
+  multiply multiply16;
+  divide divide16;
+  
+
+  always {
+  
+    // Connect inputs and outputs of ALU to each module
+    adder16.alufn = alufn;
+    adder16.a = a;
+    adder16.b = b;
+    z = adder16.z;
+    v = adder16.v;
+    n = adder16.n;    
+    
+    compare16.alufn = alufn;
+    compare16.a = a;
+    compare16.b = b;
+    
+    boolean16.alufn = alufn;
+    boolean16.a = a;
+    boolean16.b = b;
+    
+    shifter16.alufn = alufn;
+    shifter16.a = a;
+    shifter16.b = b;
+    
+    multiply16.a = a;
+    multiply16.b = b;
+    
+    divide16.a = a;
+    divide16.b = b;
+    
+    out = 16b0;        
+    
+    case(alufn[6:4]){
+      b000:
+        out = adder16.out + e; // e default 0, when input as 1, will force error
+        
+      b001:
+        out = boolean16.out + e;
+      
+      b010:
+        out = shifter16.out + e;
+        
+      b011:
+        out = compare16.out + e;
+        
+      b100:
+        out = multiply16.out + e;
+        
+      b110:
+        out = divide16.out + e;
+
+    }
+  }
+}

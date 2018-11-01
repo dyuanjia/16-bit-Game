@@ -1,0 +1,10 @@
+module multiply (
+    input a[16],
+    input b[16],
+    output out[16]   // 16-bit output
+  ) {
+
+  always {
+    out = a * b;
+  }
+}

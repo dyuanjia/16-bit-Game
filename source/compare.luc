@@ -1,0 +1,33 @@
+module compare (
+    input alufn[7], //inputs
+    input a[16],
+    input b[16],
+    output out[16] //output
+    
+  ) {
+    
+  adder adder16;
+  sig z;   //signals from subtractor
+  sig v;
+  sig n;
+
+  always {
+    adder16.alufn = 7b1; //Subtract
+    adder16.a = a;
+    adder16.b = b;
+    z = adder16.z;
+    v = adder16.v;
+    n = adder16.n;
+    
+    out[15:1] = 15b0; //bits 1-15 show 0
+    
+    case (alufn[2:1]) { //alufn signals for comparator module
+      b01:
+        out[0] =  z; //LSB shows result of CMPEQ
+      b10:
+        out[0] = n^v; //CMPLT
+      b11:
+        out[0] = z | n^v; //CMPLEQ  
+    }
+  }
+}

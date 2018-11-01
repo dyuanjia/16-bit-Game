@@ -1,0 +1,27 @@
+module display (
+    input clk,         // clock
+    input rst,         // reset
+    input chars[4][5], // characters to show
+    output seg[7],     // segments on the display
+    output sel[4]      // character position select
+  ) {
+  
+  const DIV = 16;      // regulates the speed of display
+  
+  .clk(clk), .rst(rst) {
+    dff ctr[2+DIV];    // counter for displaying error message
+  }
+  
+  char characs;
+  decoder dec (#WIDTH(2));
+  
+  always {
+    characs.char = chars[ctr.q[2+DIV-1-:2]]; // select the value for the active digit
+    seg = characs.segs;                      // output the decoded value
+    
+    dec.in = ctr.q[2+DIV-1-:2];              // decode active char to one-hot           
+    sel = dec.out;                           // output the active char
+    
+    ctr.d = ctr.q + 1;                   // increment
+  }
+}
