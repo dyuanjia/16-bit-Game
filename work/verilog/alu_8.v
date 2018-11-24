@@ -4,11 +4,10 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module alu_3 (
+module alu_8 (
     input [6:0] alufn,
     input [15:0] a,
     input [15:0] b,
-    input e,
     output reg [15:0] out,
     output reg z,
     output reg v,
@@ -24,7 +23,7 @@ module alu_3 (
   reg [16-1:0] M_adder16_a;
   reg [16-1:0] M_adder16_b;
   reg [7-1:0] M_adder16_alufn;
-  adder_6 adder16 (
+  adder_11 adder16 (
     .a(M_adder16_a),
     .b(M_adder16_b),
     .alufn(M_adder16_alufn),
@@ -38,7 +37,7 @@ module alu_3 (
   reg [7-1:0] M_compare16_alufn;
   reg [16-1:0] M_compare16_a;
   reg [16-1:0] M_compare16_b;
-  compare_7 compare16 (
+  compare_12 compare16 (
     .alufn(M_compare16_alufn),
     .a(M_compare16_a),
     .b(M_compare16_b),
@@ -49,7 +48,7 @@ module alu_3 (
   reg [16-1:0] M_boolean16_a;
   reg [16-1:0] M_boolean16_b;
   reg [7-1:0] M_boolean16_alufn;
-  boolean_8 boolean16 (
+  boolean_13 boolean16 (
     .a(M_boolean16_a),
     .b(M_boolean16_b),
     .alufn(M_boolean16_alufn),
@@ -60,7 +59,7 @@ module alu_3 (
   reg [7-1:0] M_shifter16_alufn;
   reg [16-1:0] M_shifter16_a;
   reg [16-1:0] M_shifter16_b;
-  shifter_9 shifter16 (
+  shifter_14 shifter16 (
     .alufn(M_shifter16_alufn),
     .a(M_shifter16_a),
     .b(M_shifter16_b),
@@ -70,7 +69,7 @@ module alu_3 (
   wire [16-1:0] M_multiply16_out;
   reg [16-1:0] M_multiply16_a;
   reg [16-1:0] M_multiply16_b;
-  multiply_10 multiply16 (
+  multiply_15 multiply16 (
     .a(M_multiply16_a),
     .b(M_multiply16_b),
     .out(M_multiply16_out)
@@ -79,7 +78,7 @@ module alu_3 (
   wire [16-1:0] M_divide16_out;
   reg [16-1:0] M_divide16_a;
   reg [16-1:0] M_divide16_b;
-  divide_11 divide16 (
+  divide_16 divide16 (
     .a(M_divide16_a),
     .b(M_divide16_b),
     .out(M_divide16_out)
@@ -109,22 +108,22 @@ module alu_3 (
     
     case (alufn[4+2-:3])
       3'h0: begin
-        out = M_adder16_out + e;
+        out = M_adder16_out;
       end
       3'h1: begin
-        out = M_boolean16_out + e;
+        out = M_boolean16_out;
       end
       3'h2: begin
-        out = M_shifter16_out + e;
+        out = M_shifter16_out;
       end
       3'h3: begin
-        out = M_compare16_out + e;
+        out = M_compare16_out;
       end
       3'h4: begin
-        out = M_multiply16_out + e;
+        out = M_multiply16_out;
       end
       3'h6: begin
-        out = M_divide16_out + e;
+        out = M_divide16_out;
       end
     endcase
   end

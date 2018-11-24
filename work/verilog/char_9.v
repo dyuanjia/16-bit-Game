@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module char_4 (
+module char_9 (
     input [4:0] char,
     output reg [6:0] segs
   );

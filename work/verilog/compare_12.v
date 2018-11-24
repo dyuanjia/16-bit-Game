@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module compare_7 (
+module compare_12 (
     input [6:0] alufn,
     input [15:0] a,
     input [15:0] b,
@@ -20,7 +20,7 @@ module compare_7 (
   reg [16-1:0] M_adder16_a;
   reg [16-1:0] M_adder16_b;
   reg [7-1:0] M_adder16_alufn;
-  adder_6 adder16 (
+  adder_11 adder16 (
     .a(M_adder16_a),
     .b(M_adder16_b),
     .alufn(M_adder16_alufn),

@@ -15,9 +15,7 @@ module mojo_top (
     output io_seg [8],      // 7-segment LEDs on IO Shield
     output io_sel [4],      // Digit select on IO Shield
     input io_button [5],    // 5 buttons on IO Shield
-    input io_dip [3][8],    // DIP switches on IO Shield
-    input alufn [7]
-    
+    input io_dip [3][8]     // DIP switches on IO Shield   
   ) {
   
   sig rst;                  // reset signal
@@ -26,84 +24,34 @@ module mojo_top (
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
+    button_conditioner btn_cond;
+    edge_detector edge;
     
-    .rst(rst) {
-      fsm modes = {A, B, EQ ,AUTO};
-
-      dff a[16]; // flip-flops to save inputs a and b
-      dff b[16];
+    .rst(rst) { 
+      gen nums;
       display seg;
     }    
   }
   
-  // Initialize alu
-  alu alu16;
   
   always {
     reset_cond.in = ~rst_n; // input raw inverted reset signal
     rst = reset_cond.out;   // conditioned reset
-    seg.chars = {5h0, 5h0, 5h0, 5h0}; //test segs
-    // Connect inputs and outputs of external signals to the ALU unit
-    alu16.alufn = 7b0;
-    alu16.a = a.q; // get value from flip-flops above
-    alu16.b = b.q;
-    alu16.alufn = io_dip[2][6:0];
-    
-    if(io_dip[2][7]==1){ // when equals to 1, error will be introduced
-      alu16.e = 1;
-    } else {
-      alu16.e = 0;
-    }
-    
-
+        
+    io_led = 3x{{8h00}};
     io_seg = ~seg.seg;             // connect segments to the driver
     io_sel = ~seg.sel; 
     
-    io_led = 3x{{8h00}};
+    btn_cond.in=io_button[0];
+    edge.in=btn_cond.out;
+    nums.en=edge.out;
     
-    case(modes.q) {
-      modes.A: //enter A inputs
-        seg.chars = {5h2, 5h0, 5h0, 5h0};  //display A
-        a.d[15:8] = io_dip[1];      //A inputs using dip switches
-        a.d[7:0] = io_dip[0];
-        io_led[0] = io_dip[0];      //Display A inputs on LED                
-        io_led[1] = io_dip[1];
+    io_led[1]=nums.out[15:8];
+    io_led[0]=nums.out[7:0];
+    nums.seed=32b00001111;         // SEED: very important
+    
+    seg.chars = {5h0, 5h0, 5h0, 5h0};    // clear display
         
-        if (io_button[2] == 1)      // Go to auto mode
-          modes.d = modes.AUTO;
-        if (io_button[0] == 1){     // Go to mode B to enter B inputs
-          modes.d = modes.B;
-        }
-      
-      modes.B:  // enter B inputs 
-        seg.chars = {5hA, 5h0, 5h0, 5h0};  //Display B
-        b.d[15:8] = io_dip[1];         //Enter b inputs on dip switches
-        b.d[7:0] = io_dip[0];
-        io_led[0] = io_dip[0];         //Display b inputs on led
-        io_led[1] = io_dip[1];
-        
-        if (io_button[2] == 1)         //Go to Auto mode
-          modes.d = modes.AUTO;
-        if (io_button[1] == 1){
-          modes.d = modes.EQ;          //Go to EQ mode to show outputs
-        }
-      
-      modes.EQ: //To show outputs
-        io_led[0] = alu16.out[7:0];    //outputs displayed on LED
-        io_led[1] = alu16.out[15:8];
-        
-        io_led[2][7:3] = 5h00;  
-        io_led[2][2] = alu16.z;        // z,v,n displayed on led
-        io_led[2][1] = alu16.v;
-        io_led[2][0] = alu16.n;
-        if (io_button[2] == 1)        //Go to auto mode
-          modes.d = modes.AUTO;
-        
-      modes.AUTO: //Auto mode
-        io_led = 3x{{8h00}};
-        
-    } 
-     
     
     led = 8h00;             // turn LEDs off
     spi_miso = bz;          // not using SPI

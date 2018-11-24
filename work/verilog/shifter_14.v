@@ -4,7 +4,8 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module multiply_10 (
+module shifter_14 (
+    input [6:0] alufn,
     input [15:0] a,
     input [15:0] b,
     output reg [15:0] out
@@ -13,6 +14,20 @@ module multiply_10 (
   
   
   always @* begin
-    out = a * b;
+    
+    case (alufn[0+1-:2])
+      2'h0: begin
+        out = a << b[0+3-:4];
+      end
+      2'h1: begin
+        out = a >> b[0+3-:4];
+      end
+      2'h3: begin
+        out = $signed(a) >>> b[0+3-:4];
+      end
+      default: begin
+        out = a;
+      end
+    endcase
   end
 endmodule

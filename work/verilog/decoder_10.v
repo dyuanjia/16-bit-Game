@@ -4,19 +4,20 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module divide_11 (
-    input [15:0] a,
-    input [15:0] b,
-    output reg [15:0] out
+/*
+   Parameters:
+     WIDTH = 2
+*/
+module decoder_10 (
+    input [1:0] in,
+    output reg [3:0] out
   );
   
+  localparam WIDTH = 2'h2;
   
   
   always @* begin
-    if (b == 1'h0) begin
-      out = 58'h23c61b3b32571c7;
-    end else begin
-      out = a / b;
-    end
+    out = 1'h0;
+    out[(in)*1+0-:1] = 1'h1;
   end
 endmodule

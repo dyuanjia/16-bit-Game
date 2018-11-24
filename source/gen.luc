@@ -1,0 +1,59 @@
+module gen (
+    input clk,
+    input en,   // enable
+    input rst,  // reset
+    input seed[32],
+    output out[16]
+  ) {
+  
+  .clk(clk) {
+    .rst(rst) {
+      fsm states = {START, SPIN, DONE};
+      dff regs[32];
+      dff timer[29];
+      pn_gen rand;
+    }
+  }
+  
+  // Initialize alu
+  alu alu16;
+  
+  always {
+    rand.seed = seed;
+    rand.next = 0;                   // don't generate new numbers
+    out = 0;
+    
+    // Connect inputs and outputs of external signals to the ALU unit
+    alu16.a = 16b0; // get value from random generator
+    alu16.b = 16b0;
+    alu16.alufn = 7b0;
+ 
+    case (states.q) {
+      states.START:
+        rand.seed = seed;
+        rand.next = 0;
+        timer.d = 0;
+        if(en==1)
+          states.d=states.SPIN;
+        
+      states.SPIN:
+        rand.next = 1;             // generate a new number
+        timer.d=timer.q + 1;
+        if(timer.q[27]==1)
+          states.d=states.DONE;
+        else if(timer.q[20]==1)
+          regs.d=rand.num;
+        else
+          out=regs.q[15:0];
+          
+      states.DONE:
+        alu16.a = rand.num[31:16]; // get value from random generator
+        alu16.b = rand.num[15:0];
+        alu16.alufn = 7b0; // NEED TO CHANGE
+        out = alu16.out;
+        timer.d = 0;
+        if(en==1)
+          states.d=states.SPIN;        
+    }
+  }
+}
