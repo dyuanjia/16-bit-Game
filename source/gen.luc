@@ -49,7 +49,38 @@ module gen (
       states.DONE:
         alu16.a = rand.num[31:16]; // get value from random generator
         alu16.b = rand.num[15:0];
-        alu16.alufn = 7b0; // NEED TO CHANGE
+        if(rand.num[17:14] == 4b0000){
+          alu16.alufn = 7b0;} // ADD
+        if(rand.num[17:14] == 4b0001){
+          alu16.alufn = 7b1;} // SUB
+        if(rand.num[17:14] == 4b0010){
+          alu16.alufn = 7b0011000;} // AND
+        if(rand.num[17:14] == 4b0011){
+          alu16.alufn = 7b0011110;} // OR
+        if(rand.num[17:14] == 4b0100){
+          alu16.alufn = 7b0010110;} // XOR
+        if(rand.num[17:14] == 4b0101){
+          alu16.alufn = 7b0011010;} // A
+        if(rand.num[17:14] == 4b0110){
+          alu16.alufn = 7b0010111;} // NAND
+        if(rand.num[17:14] == 4b0111){
+          alu16.alufn = 7b0010001;} // NOR
+        if(rand.num[17:14] == 4b1000){
+          alu16.alufn = 7b0011001;} // XNOR
+        if(rand.num[17:14] == 4b1001){
+          alu16.alufn = 7b0110011;} // B
+        if(rand.num[17:14] == 4b1010){
+          alu16.alufn = 7b0100000;} // SHL
+        if(rand.num[17:14] == 4b1011){
+          alu16.alufn = 7b0100001;} // SHR
+        if(rand.num[17:14] == 4b1100){
+          alu16.alufn = 7b0100011;} // SRA
+        if(rand.num[17:14] == 4b1101){
+          alu16.alufn = 7b1000000;} // MUL   
+        if(rand.num[17:14] == 4b1110){
+          alu16.alufn = 7b0;} // ADD
+        if(rand.num[17:14] == 4b1111){
+          alu16.alufn = 7b1;} // SUB
         out = alu16.out;
         timer.d = 0;
         if(en==1)

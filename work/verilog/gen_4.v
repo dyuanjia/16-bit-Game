@@ -86,7 +86,54 @@ module gen_4 (
       DONE_states: begin
         M_alu16_a = M_rand_num[16+15-:16];
         M_alu16_b = M_rand_num[0+15-:16];
-        M_alu16_alufn = 7'h00;
+        if (M_rand_num[14+3-:4] == 4'h0) begin
+          M_alu16_alufn = 7'h00;
+        end
+        if (M_rand_num[14+3-:4] == 4'h1) begin
+          M_alu16_alufn = 7'h01;
+        end
+        if (M_rand_num[14+3-:4] == 4'h2) begin
+          M_alu16_alufn = 7'h18;
+        end
+        if (M_rand_num[14+3-:4] == 4'h3) begin
+          M_alu16_alufn = 7'h1e;
+        end
+        if (M_rand_num[14+3-:4] == 4'h4) begin
+          M_alu16_alufn = 7'h16;
+        end
+        if (M_rand_num[14+3-:4] == 4'h5) begin
+          M_alu16_alufn = 7'h1a;
+        end
+        if (M_rand_num[14+3-:4] == 4'h6) begin
+          M_alu16_alufn = 7'h17;
+        end
+        if (M_rand_num[14+3-:4] == 4'h7) begin
+          M_alu16_alufn = 7'h11;
+        end
+        if (M_rand_num[14+3-:4] == 4'h8) begin
+          M_alu16_alufn = 7'h19;
+        end
+        if (M_rand_num[14+3-:4] == 4'h9) begin
+          M_alu16_alufn = 7'h33;
+        end
+        if (M_rand_num[14+3-:4] == 4'ha) begin
+          M_alu16_alufn = 7'h20;
+        end
+        if (M_rand_num[14+3-:4] == 4'hb) begin
+          M_alu16_alufn = 7'h21;
+        end
+        if (M_rand_num[14+3-:4] == 4'hc) begin
+          M_alu16_alufn = 7'h23;
+        end
+        if (M_rand_num[14+3-:4] == 4'hd) begin
+          M_alu16_alufn = 7'h40;
+        end
+        if (M_rand_num[14+3-:4] == 4'he) begin
+          M_alu16_alufn = 7'h00;
+        end
+        if (M_rand_num[14+3-:4] == 4'hf) begin
+          M_alu16_alufn = 7'h01;
+        end
         out = M_alu16_out;
         M_timer_d = 1'h0;
         if (en == 1'h1) begin

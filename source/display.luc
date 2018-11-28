@@ -4,6 +4,7 @@ module display (
     input chars[4][5], // characters to show
     output seg[7],     // segments on the display
     output sel[4]      // character position select
+
   ) {
   
   const DIV = 16;      // regulates the speed of display

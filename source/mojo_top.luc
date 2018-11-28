@@ -15,7 +15,23 @@ module mojo_top (
     output io_seg [8],      // 7-segment LEDs on IO Shield
     output io_sel [4],      // Digit select on IO Shield
     input io_button [5],    // 5 buttons on IO Shield
-    input io_dip [3][8]     // DIP switches on IO Shield   
+    input io_dip [3][8],
+    output a0, // output to LEDs
+    output a1,
+    output a2,
+    output a3,
+    output a4,
+    output a5,
+    output a6,
+    output a7,
+    output a8,
+    output a9,
+    output a10,
+    output a11,
+    output a12,
+    output a13,
+    output a14,
+    output a15     // DIP switches on IO Shield   
   ) {
   
   sig rst;                  // reset signal
@@ -48,6 +64,24 @@ module mojo_top (
     
     io_led[1]=nums.out[15:8];
     io_led[0]=nums.out[7:0];
+    a0 = nums.out[0];
+    a1 = nums.out[1];
+    a2 = nums.out[2];
+    a3 = nums.out[3];
+    a4 = nums.out[4];
+    a5 = nums.out[5];
+    a6 = nums.out[6];
+    a7 = nums.out[7];
+    a8 = nums.out[8];
+    a9 = nums.out[9];
+    a10 = nums.out[10];
+    a11 = nums.out[11];
+    a12 = nums.out[12];
+    a13 = nums.out[13];
+    a14 = nums.out[14];
+    a15 = nums.out[15];
+    
+    
     nums.seed=32b00001111;         // SEED: very important
     
     seg.chars = {5h0, 5h0, 5h0, 5h0};    // clear display

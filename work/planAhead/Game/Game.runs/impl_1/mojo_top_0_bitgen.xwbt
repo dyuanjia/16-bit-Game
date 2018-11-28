@@ -1,8 +1,8 @@
 INTSTYLE=pa
-INFILE=C:\Users\77900\OneDrive\Documents\mojo\Game\work\planAhead\Game\Game.runs\impl_1\mojo_top_0_routed.ncd
-OUTFILE=C:\Users\77900\OneDrive\Documents\mojo\Game\work\planAhead\Game\Game.runs\impl_1\mojo_top_0.bit
+INFILE=C:\Users\user\Documents\ISTD\50.002\Github\16-bit-Game\work\planAhead\Game\Game.runs\impl_1\mojo_top_0_routed.ncd
+OUTFILE=C:\Users\user\Documents\ISTD\50.002\Github\16-bit-Game\work\planAhead\Game\Game.runs\impl_1\mojo_top_0.bit
 FAMILY=Spartan6
 PART=xc6slx9-2tqg144
-WORKINGDIR=C:\Users\77900\OneDrive\Documents\mojo\Game\work\planAhead\Game\Game.runs\impl_1
+WORKINGDIR=C:\Users\user\Documents\ISTD\50.002\Github\16-bit-Game\work\planAhead\Game\Game.runs\impl_1
 LICENSE=WebPack
-USER_INFO=211592725_0_0_677
+USER_INFO=211592056_0_0_035

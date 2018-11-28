@@ -21,7 +21,23 @@ module mojo_top_0 (
     output reg [7:0] io_seg,
     output reg [3:0] io_sel,
     input [4:0] io_button,
-    input [23:0] io_dip
+    input [23:0] io_dip,
+    output reg a0,
+    output reg a1,
+    output reg a2,
+    output reg a3,
+    output reg a4,
+    output reg a5,
+    output reg a6,
+    output reg a7,
+    output reg a8,
+    output reg a9,
+    output reg a10,
+    output reg a11,
+    output reg a12,
+    output reg a13,
+    output reg a14,
+    output reg a15
   );
   
   
@@ -81,6 +97,22 @@ module mojo_top_0 (
     M_nums_en = M_edge_out;
     io_led[8+7-:8] = M_nums_out[8+7-:8];
     io_led[0+7-:8] = M_nums_out[0+7-:8];
+    a0 = M_nums_out[0+0-:1];
+    a1 = M_nums_out[1+0-:1];
+    a2 = M_nums_out[2+0-:1];
+    a3 = M_nums_out[3+0-:1];
+    a4 = M_nums_out[4+0-:1];
+    a5 = M_nums_out[5+0-:1];
+    a6 = M_nums_out[6+0-:1];
+    a7 = M_nums_out[7+0-:1];
+    a8 = M_nums_out[8+0-:1];
+    a9 = M_nums_out[9+0-:1];
+    a10 = M_nums_out[10+0-:1];
+    a11 = M_nums_out[11+0-:1];
+    a12 = M_nums_out[12+0-:1];
+    a13 = M_nums_out[13+0-:1];
+    a14 = M_nums_out[14+0-:1];
+    a15 = M_nums_out[15+0-:1];
     M_nums_seed = 32'h0000000f;
     M_seg_chars = 20'h00000;
     led = 8'h00;
