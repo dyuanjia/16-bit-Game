@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-LAPTOP-4DBHRT1I::  Wed Nov 28 14:52:11 2018
+DESKTOP-OL9UF4J::  Wed Nov 28 15:15:01 2018
 
 par -intstyle pa -w -mt on mojo_top_0.ncd mojo_top_0_routed.ncd 
 
@@ -26,11 +26,11 @@ Slice Logic Utilization:
     Number used as Latches:                      1
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                        430 out of   5,720    7%
-    Number used as logic:                      411 out of   5,720    7%
-      Number using O6 output only:             268
+  Number of Slice LUTs:                        442 out of   5,720    7%
+    Number used as logic:                      423 out of   5,720    7%
+      Number using O6 output only:             273
       Number using O5 output only:              60
-      Number using O5 and O6:                   83
+      Number using O5 and O6:                   90
       Number used as ROM:                        0
     Number used as Memory:                       1 out of   1,440    1%
       Number used as Dual Port RAM:              0
@@ -45,12 +45,12 @@ Slice Logic Utilization:
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                   151 out of   1,430   10%
+  Number of occupied Slices:                   157 out of   1,430   10%
   Number of MUXCYs used:                       132 out of   2,860    4%
-  Number of LUT Flip Flop pairs used:          440
-    Number with an unused Flip Flop:           284 out of     440   64%
-    Number with an unused LUT:                  10 out of     440    2%
-    Number of fully used LUT-FF pairs:         146 out of     440   33%
+  Number of LUT Flip Flop pairs used:          452
+    Number with an unused Flip Flop:           292 out of     452   64%
+    Number with an unused LUT:                  10 out of     452    2%
+    Number of fully used LUT-FF pairs:         150 out of     452   33%
     Number of slice register sites lost
       to control set restrictions:               0 out of  11,440    0%
 
@@ -99,45 +99,21 @@ WARNING:Par:288 - The signal io_button(2)_IBUF has no load.  PAR will not attemp
 WARNING:Par:288 - The signal io_button(3)_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal io_button(4)_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal cclk_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(0)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(1)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(2)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(3)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(4)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(5)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(6)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(7)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(8)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(9)_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal spi_sck_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal avr_rx_busy_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(10)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(11)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(12)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(20)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(13)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(21)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(14)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(22)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(15)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(23)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(16)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(17)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(18)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(19)_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal avr_tx_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal spi_ss_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal spi_mosi_IBUF has no load.  PAR will not attempt to route this signal.
 Starting Multi-threaded Router
 
 
-Phase  1  : 2311 unrouted;      REAL time: 2 secs 
+Phase  1  : 2367 unrouted;      REAL time: 3 secs 
 
-Phase  2  : 2020 unrouted;      REAL time: 3 secs 
+Phase  2  : 2063 unrouted;      REAL time: 3 secs 
 
-Phase  3  : 967 unrouted;      REAL time: 4 secs 
+Phase  3  : 1079 unrouted;      REAL time: 5 secs 
 
-Phase  4  : 967 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 4 secs 
+Phase  4  : 1079 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 5 secs 
 
 Updating file: mojo_top_0_routed.ncd with current fully routed design.
 
@@ -152,7 +128,7 @@ Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL 
 Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 5 secs 
 
 Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 5 secs 
-Total REAL time to Router completion: 5 secs 
+Total REAL time to Router completion: 6 secs 
 Total CPU time to Router completion (all processors): 5 secs 
 
 Generating "PAR" statistics.
@@ -164,10 +140,10 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|           clk_BUFGP | BUFGMUX_X2Y11| No   |   45 |  0.097     |  1.498      |
+|           clk_BUFGP | BUFGMUX_X2Y11| No   |   51 |  0.108     |  1.500      |
 +---------------------+--------------+------+------+------------+-------------+
 |nums/M_alu16_alufn[1 |              |      |      |            |             |
-|                   ] |         Local|      |   51 |  0.000     |  1.785      |
+|                   ] |         Local|      |   51 |  0.000     |  0.821      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -187,8 +163,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-  TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH | SETUP       |    15.350ns|     4.650ns|       0|           0
-   50%                                      | HOLD        |     0.423ns|            |       0|           0
+  TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH | SETUP       |    15.032ns|     4.968ns|       0|           0
+   50%                                      | HOLD        |     0.424ns|            |       0|           0
 ----------------------------------------------------------------------------------------------------------
 
 
@@ -199,19 +175,19 @@ Generating Pad Report.
 
 All signals are completely routed.
 
-WARNING:Par:283 - There are 34 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
+WARNING:Par:283 - There are 10 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
-Total REAL time to PAR completion: 5 secs 
-Total CPU time to PAR completion (all processors): 5 secs 
+Total REAL time to PAR completion: 6 secs 
+Total CPU time to PAR completion (all processors): 6 secs 
 
-Peak Memory Usage:  298 MB
+Peak Memory Usage:  288 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.
 Timing: Completed - No errors found.
 
 Number of error messages: 0
-Number of warning messages: 36
+Number of warning messages: 12
 Number of info messages: 0
 
 Writing design to file mojo_top_0_routed.ncd

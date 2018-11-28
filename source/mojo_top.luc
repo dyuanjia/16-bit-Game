@@ -82,7 +82,10 @@ module mojo_top (
     a15 = nums.out[15];
     
     
-    nums.seed=32b00001111;         // SEED: very important
+    nums.seed[31:24]=8b01010101;         // SEED: very important
+    nums.seed[23:16]=io_dip[2];
+    nums.seed[15:8]=io_dip[1];
+    nums.seed[7:0]=io_dip[0];
     
     seg.chars = {5h0, 5h0, 5h0, 5h0};    // clear display
         

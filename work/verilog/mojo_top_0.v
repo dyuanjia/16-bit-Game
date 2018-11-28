@@ -113,7 +113,10 @@ module mojo_top_0 (
     a13 = M_nums_out[13+0-:1];
     a14 = M_nums_out[14+0-:1];
     a15 = M_nums_out[15+0-:1];
-    M_nums_seed = 32'h0000000f;
+    M_nums_seed[24+7-:8] = 8'h55;
+    M_nums_seed[16+7-:8] = io_dip[16+7-:8];
+    M_nums_seed[8+7-:8] = io_dip[8+7-:8];
+    M_nums_seed[0+7-:8] = io_dip[0+7-:8];
     M_seg_chars = 20'h00000;
     led = 8'h00;
     spi_miso = 1'bz;
