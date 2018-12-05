@@ -16,6 +16,7 @@ module mojo_top (
     output io_sel [4],      // Digit select on IO Shield
     input io_button [5],    // 5 buttons on IO Shield
     input io_dip [3][8],
+    input button,
     output a0, // output to LEDs
     output a1,
     output a2,
@@ -31,7 +32,11 @@ module mojo_top (
     output a12,
     output a13,
     output a14,
-    output a15     // DIP switches on IO Shield   
+    output a15,
+    output di0,
+    output di1,
+    output di2,
+    input button2
   ) {
   
   sig rst;                  // reset signal
@@ -40,28 +45,66 @@ module mojo_top (
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
+    counter slowclock(#SIZE(1),#DIV(24)); //modify the DIV value to change clock frequency
     button_conditioner btn_cond;
-    edge_detector edge;
+    button_conditioner dif_cond;
+    edge_detector edge(#RISE(1), #FALL(0));
+    edge_detector edge2(#RISE(1), #FALL(0));
+    
     
     .rst(rst) { 
       gen nums;
       display seg;
+      difficulty reward;
     }    
   }
   
   
   always {
+
     reset_cond.in = ~rst_n; // input raw inverted reset signal
     rst = reset_cond.out;   // conditioned reset
+    slowclock.rst=rst;
         
     io_led = 3x{{8h00}};
     io_seg = ~seg.seg;             // connect segments to the driver
     io_sel = ~seg.sel; 
     
-    btn_cond.in=io_button[0];
+    reward.diffchange = 0;
+    btn_cond.in=button;
+    dif_cond.in=button2;
+    edge2.in = dif_cond.out;   
+    if(edge2.out){
+      reward.diffchange = 1;
+    }
+    //reward.diffchange = edge2.out;
+    
+    reward.num = nums.out[15:0];
     edge.in=btn_cond.out;
     nums.en=edge.out;
     
+    a0 = nums.out[0]; // Map diffulty LEDs
+    a1 = nums.out[1];
+    a2 = nums.out[2];
+    a3 = nums.out[3];
+    a4 = nums.out[4];
+    a5 = nums.out[5];
+    a6 = nums.out[6];
+    a7 = nums.out[7];
+    a8 = nums.out[8];
+    a9 = nums.out[9];
+    a10 = nums.out[10];
+    a11 = nums.out[11];
+    a12 = nums.out[12];
+    a13 = nums.out[13];
+    a14 = nums.out[14];
+    a15 = nums.out[15];
+    
+    di0 = reward.diff[0]; // Map output difficulty LEDs
+    di1 = reward.diff[1];
+    di2 = reward.diff[2];
+    
+    if(reward.out == 0){
     io_led[1]=nums.out[15:8];
     io_led[0]=nums.out[7:0];
     a0 = nums.out[0];
@@ -80,7 +123,73 @@ module mojo_top (
     a13 = nums.out[13];
     a14 = nums.out[14];
     a15 = nums.out[15];
-    
+    }
+    if(reward.out == 1){
+      if(nums.out[0]==1){
+        io_led[0][0]=slowclock.value;
+        a0 = slowclock.value;
+      }
+      if(nums.out[1]==1){
+        io_led[0][1]=slowclock.value;
+        a1 = slowclock.value;
+      }
+      if(nums.out[2]==1){
+        io_led[0][2]=slowclock.value;
+        a2 = slowclock.value;
+      }
+      if(nums.out[3]==1){
+        io_led[0][3]=slowclock.value;
+        a3 = slowclock.value;
+      }
+      if(nums.out[4]==1){
+        io_led[0][4]=slowclock.value;
+        a4 = slowclock.value;
+      }
+      if(nums.out[5]==1){
+        io_led[0][5]=slowclock.value;
+        a5 = slowclock.value;
+      }
+      if(nums.out[6]==1){
+        io_led[0][6]=slowclock.value;
+        a6 = slowclock.value;
+      }
+      if(nums.out[7]==1){
+        io_led[0][7]=slowclock.value;
+        a7 = slowclock.value;
+      }
+      if(nums.out[8]==1){
+        io_led[1][0]=slowclock.value;
+        a8 = slowclock.value;
+      }
+      if(nums.out[9]==1){
+        io_led[1][1]=slowclock.value;
+        a9 = slowclock.value;
+      }
+      if(nums.out[10]==1){
+        io_led[1][2]=slowclock.value;
+        a10 = slowclock.value;
+      }
+      if(nums.out[11]==1){
+        io_led[1][3]=slowclock.value;
+        a11 = slowclock.value;
+      }
+      if(nums.out[12]==1){
+        io_led[1][4]=slowclock.value;
+        a12 = slowclock.value;
+      }
+      if(nums.out[13]==1){
+        io_led[1][5]=slowclock.value;
+        a13 = slowclock.value;
+      }
+      if(nums.out[14]==1){
+        io_led[1][6]=slowclock.value;
+        a14 = slowclock.value;
+      }
+      if(nums.out[15]==1){
+        io_led[1][7]=slowclock.value;
+        a15 = slowclock.value;
+      }
+    }
     
     nums.seed[31:24]=8b01010101;         // SEED: very important
     nums.seed[23:16]=io_dip[2];

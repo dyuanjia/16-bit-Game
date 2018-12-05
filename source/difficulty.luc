@@ -1,0 +1,91 @@
+module difficulty (
+    input clk,  // clock
+    input rst,  // reset
+    output out,
+    output diff[3], // output LED
+    input diffchange,
+    input num[16]
+  ) {
+  
+  .clk(clk) {
+    .rst(rst) {
+      fsm states = {EASY, MEDIUM, HARD};
+    }
+  }
+  
+  
+  sig i[5];
+  sig ones[5];
+  
+  
+  always {
+    i = 0;
+    ones = 0;
+    out = 0;
+    diff = 3b000;
+    case(states.q){
+    
+      states.EASY:
+        diff = 3b001;
+        for(i = 0 ; i < 16 ; i++){
+          if(num[i] == 1){
+          ones = ones + 1;
+          }
+        }
+        if(ones>10){
+          out = 1;
+          }
+        if(ones == 4){
+          for(i = 0 ; i < 4 ; i ++){
+            if((num[i] & num[i+4] & num[i + 8] & num[i + 12]) == 1){
+              out = 1;}
+            if((num[4*i] & num[4*i+1] & num[4*i+2] & num[4*i+3]) == 1){
+              out = 1;}
+          }
+          if(num[0] & num[5] & num[10] & num[15] == 1){
+            out = 1;}
+          if(num[12] & num[9] & num[6] & num[3] == 1){
+            out = 1;}
+        }
+        if(num == 65535){
+          out = 1;}
+        if(diffchange==1){
+          states.d = states.MEDIUM;
+          }
+        
+      states.MEDIUM:
+        diff = 3b010;
+        for(i = 0 ; i < 16 ; i++){
+          if(num[i] == 1){
+          ones = ones + 1;
+          }
+        }
+        if(ones == 4){
+          for(i = 0 ; i < 4 ; i ++){
+            if(num[i] & num[i+4] & num[i + 8] & num[i + 12] == 1){
+              out = 1;}
+            if(num[4*i] & num[4*i+1] & num[4*i+2] & num[4*i+3] == 1){
+              out = 1;}
+          }
+          if(num[0] & num[5] & num[10] & num[15] == 1){
+            out = 1;}
+          if(num[12] & num[9] & num[6] & num[3] == 1){
+            out = 1;}
+        }
+        if(num == 65535){
+          out = 1;}
+        if(diffchange==1){
+          states.d = states.HARD;
+        }
+        
+      states.HARD:
+        diff = 3b100;
+        if(num == 65535){
+          out = 1;}
+        if(diffchange==1){
+          states.d = states.EASY;
+        }
+        
+    }
+  }
+}
