@@ -35,7 +35,7 @@ module difficulty (
         if(ones>10){
           out = 1;
           }
-        if(ones == 4){
+        if(ones < 8){
           for(i = 0 ; i < 4 ; i ++){
             if((num[i] & num[i+4] & num[i + 8] & num[i + 12]) == 1){
               out = 1;}
@@ -60,7 +60,7 @@ module difficulty (
           ones = ones + 1;
           }
         }
-        if(ones == 4){
+        if(ones < 8){
           for(i = 0 ; i < 4 ; i ++){
             if(num[i] & num[i+4] & num[i + 8] & num[i + 12] == 1){
               out = 1;}
